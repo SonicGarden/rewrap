@@ -32,14 +32,30 @@ const render = (root: HTMLElement, component: Component, props: any) => {
   ReactDOM.render(elem, root)
 }
 
+const defineRewrapComponent = (
+  name: string,
+  connectedCallback: (this:HTMLElement) => void
+): void => {
+  class RewrapElement extends HTMLElement {
+    connectedCallback() {
+      connectedCallback.call(this)
+    }
+
+    disconnectedCallback() {
+      ReactDOM.unmountComponentAtNode(this)
+    }
+  }
+
+  window.customElements.define(name, RewrapElement)
+}
+
 export const rewrap = (
   name: string,
   component: Component,
   hasChildren = false
 ): void => {
-  class RewrapElement extends HTMLElement {
-    connectedCallback() {
-      const props = getProps(this)
+  defineRewrapComponent(name, function() {
+    const props = getProps(this)
 
       if (!hasChildren) {
         return render(this, component, props)
@@ -52,12 +68,21 @@ export const rewrap = (
           children: getChildren(this),
         })
       }, 0)
-    }
+  })
+}
 
-    disconnectedCallback() {
-      ReactDOM.unmountComponentAtNode(this)
-    }
-  }
+export const asyncRewrap = (
+  name: string,
+  component: () => Promise<Component>,
+  hasChildren = false
+): void => {
+  defineRewrapComponent(name, async function() {
+    const props = getProps(this)
+    const resolvedComponent = await component()
 
-  window.customElements.define(name, RewrapElement)
+    render(this, resolvedComponent, {
+      ...props,
+      ...(hasChildren ? { children: getChildren(this) } : {})
+    })
+  })
 }

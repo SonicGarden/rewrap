@@ -1,6 +1,6 @@
 {
   "name": "@sonicgarden/rewrap",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "aki77",
@@ -9,6 +9,9 @@
     "build": "tsc",
     "prepublishOnly": "tsc"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
