@@ -31,6 +31,13 @@ You can then use this element in an HTML file:
 <my-component-with-children>
   <div class="alert">Hello, world!</div>
 </my-component-with-children>
+
+<!-- OR -->
+<my-component-with-children>
+  <template>
+    <div class="alert">Hello, world!</div>
+  </template>
+</my-component-with-children>
 ```
 
 ## Limitation
