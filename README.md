@@ -2,6 +2,13 @@
 
 Wrapping React components with custom elements.
 
+## React compatibility
+
+| React Version | rewrap Version |
+| ------------- |:-------------:|
+| v18.x | 1.x |
+| v17.x | 0.x |
+
 ## Installation
 
 ```

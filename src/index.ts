@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot, Root } from 'react-dom/client'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Component = React.FunctionComponent<any> | React.ComponentClass<any>
@@ -37,10 +37,14 @@ const getProps = (element: HTMLElement): any => {
   return JSON.parse(json)
 }
 
+const roots = new WeakMap<HTMLElement,Root>()
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const render = (root: HTMLElement, component: Component, props: any) => {
+const render = (container: HTMLElement, component: Component, props: any) => {
   const elem = React.createElement(component, props)
-  ReactDOM.render(elem, root)
+  const root = createRoot(container)
+  root.render(elem)
+  roots.set(container, root)
 }
 
 const defineRewrapComponent = (name: string, connectedCallback: (el: HTMLElement) => void): void => {
@@ -50,7 +54,7 @@ const defineRewrapComponent = (name: string, connectedCallback: (el: HTMLElement
     }
 
     disconnectedCallback() {
-      ReactDOM.unmountComponentAtNode(this)
+      roots.get(this)?.unmount()
     }
   }
 
