@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>rewrap demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <x-welcome data-props="{&quot;name&quot;:&quot;world&quot;}"></x-welcome>
+    </div>
+    <script type="module">
+      import { rewrap } from './src/index.ts'
+      import { Welcome } from './src/welcome.tsx'
+
+      rewrap('x-welcome', Welcome)
+    </script>
+  </body>
+</html>
