@@ -1,23 +1,29 @@
 {
   "name": "@sonicgarden/rewrap",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/rewrap.mjs",
+  "type": "module",
+  "types": "types/index.d.ts",
   "author": "aki77",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "tsc"
+    "clean": "rm -rf dist && rm -rf types",
+    "prebuild": "npm run clean && mkdir dist",
+    "build": "tsc &&  vite build",
+    "dev": "vite --open",
+    "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "devDependencies": {
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "vite": "^3.0.3"
   },
   "peerDependencies": {
     "react": "^18.0.0",
