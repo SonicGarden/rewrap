@@ -38,6 +38,17 @@ const getProps = (element: HTMLElement): any => {
 }
 
 const roots = new WeakMap<HTMLElement,Root>()
+const childNodes = new WeakMap<HTMLElement,Node[]>()
+
+const saveChildren = (container: HTMLElement) => {
+  childNodes.set(container, Array.from(container.childNodes).map(n => n.cloneNode(true)))
+}
+
+const restoreChildren = (container: HTMLElement) => {
+  for (const node of childNodes.get(container) || []) {
+    container.append(node)
+  }
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const render = (container: HTMLElement, component: Component, props: any) => {
@@ -55,6 +66,7 @@ const defineRewrapComponent = (name: string, connectedCallback: (el: HTMLElement
 
     disconnectedCallback() {
       roots.get(this)?.unmount()
+      restoreChildren(this)
     }
   }
 
@@ -71,6 +83,7 @@ export const rewrap = (name: string, component: Component, hasChildren = false):
 
     // NOTE: Wait for children to render
     window.setTimeout(() => {
+      saveChildren(el)
       render(el, component, {
         ...props,
         children: getChildren(el),
