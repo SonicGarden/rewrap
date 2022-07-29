@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>rewrap demo with turbo</title>
+    <script type="module">
+      import 'https://unpkg.com/@hotwired/turbo@7.1.0'
+      import { rewrap } from './src/index.ts'
+      import { Welcome, WelcomeWithChildren } from './src/welcome.tsx'
+
+      Turbo.start()
+      rewrap('x-welcome', Welcome)
+      rewrap('x-welcome-with-children', WelcomeWithChildren, true)
+    </script>
+  </head>
+  <body>
+    <h1>Turbo Page 1</h1>
+    <div id="app">
+      <x-welcome data-props="{&quot;name&quot;:&quot;world&quot;}"></x-welcome>
+      <x-welcome-with-children>
+        <template>
+          <span>world</span>
+          <span>!</span>
+        </template>
+      </x-welcome-with-children>
+    </div>
+    <a href="/turbo_2.html">To page 2</a>
+  </body>
+</html>
