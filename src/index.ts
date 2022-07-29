@@ -16,14 +16,12 @@ const getChildren = (el: HTMLElement) => {
 
   const fragment = document.createDocumentFragment()
   while (el.childNodes.length > 0) {
-    if (el.childNodes[0].nodeName !== 'TEMPLATE') {
+    if (el.childNodes[0].nodeName === 'TEMPLATE') {
+      fragment.append((el.childNodes[0] as HTMLTemplateElement).content)
+      el.childNodes[0].remove()
+    } else {
       fragment.append(el.childNodes[0])
-      continue
     }
-    const div = document.createElement('div')
-    div.innerHTML = (el.childNodes[0] as HTMLTemplateElement).innerHTML
-    fragment.append(div)
-    el.childNodes[0].remove()
   }
   return fragmentToReactElement(fragment)
 }
