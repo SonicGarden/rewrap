@@ -7,12 +7,18 @@
   <body>
     <div id="app">
       <x-welcome data-props="{&quot;name&quot;:&quot;world&quot;}"></x-welcome>
+      <x-welcome-with-children>
+        <template>
+          world
+        </template>
+      </x-welcome-with-children>
     </div>
     <script type="module">
       import { rewrap } from './src/index.ts'
-      import { Welcome } from './src/welcome.tsx'
+      import { Welcome, WelcomeWithChildren } from './src/welcome.tsx'
 
       rewrap('x-welcome', Welcome)
+      rewrap('x-welcome-with-children', WelcomeWithChildren, true)
     </script>
   </body>
 </html>
