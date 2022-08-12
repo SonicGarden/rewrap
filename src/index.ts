@@ -80,13 +80,13 @@ export const rewrap = (name: string, component: Component, hasChildren = false):
     }
 
     // NOTE: Wait for children to render
-    window.setTimeout(() => {
+    window.requestAnimationFrame(() => {
       saveChildren(el)
       render(el, component, {
         ...props,
         children: getChildren(el),
       })
-    }, 0)
+    })
   })
 }
 
