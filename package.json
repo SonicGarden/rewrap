@@ -1,6 +1,6 @@
 {
   "name": "@sonicgarden/rewrap",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "module": "dist/rewrap.js",
   "type": "module",
   "types": "types/index.d.ts",
@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm -rf dist && rm -rf types",
     "prebuild": "npm run clean && mkdir dist",
-    "build": "tsc &&  vite build",
+    "build": "tsc && vite build",
     "dev": "vite --open",
     "prepublishOnly": "npm run build"
   },
@@ -18,15 +18,15 @@
     "types"
   ],
   "devDependencies": {
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^4.6.3",
     "vite": "^3.0.3"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   }
 }
