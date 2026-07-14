@@ -6,12 +6,13 @@
   "types": "types/index.d.ts",
   "author": "aki77",
   "license": "MIT",
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "clean": "rm -rf dist && rm -rf types",
-    "prebuild": "npm run clean && mkdir dist",
+    "prebuild": "pnpm run clean && mkdir dist",
     "build": "tsc && vite build",
     "dev": "vite --open",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "files": [
     "dist",
