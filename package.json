@@ -1,6 +1,6 @@
 {
   "name": "@sonicgarden/rewrap",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "module": "dist/rewrap.js",
   "type": "module",
   "types": "types/index.d.ts",
