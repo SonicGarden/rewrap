@@ -57,6 +57,8 @@ const render = (container: HTMLElement, component: Component, props: any) => {
 }
 
 const defineRewrapComponent = (name: string, connectedCallback: (el: HTMLElement) => void): void => {
+  if (window.customElements.get(name)) return
+
   class RewrapElement extends HTMLElement {
     connectedCallback() {
       connectedCallback(this)

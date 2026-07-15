@@ -13,7 +13,7 @@ Wrapping React components with custom elements.
 ## Installation
 
 ```
-yarn add @sonicgarden/rewrap
+pnpm add @sonicgarden/rewrap
 ```
 
 ## Usage
